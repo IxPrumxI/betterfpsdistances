@@ -4,7 +4,7 @@ import com.betterfpsdist.BetterfpsdistMod;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.LevelRenderer;
 import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.chunk.ChunkRenderDispatcher;
+import net.minecraft.client.renderer.chunk.SectionRenderDispatcher;
 import net.minecraft.world.phys.Vec3;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -18,19 +18,19 @@ public class LevelRendererMixin
     @Shadow
     @Final
     private Minecraft                         minecraft;
-    private ChunkRenderDispatcher.RenderChunk current = null;
+    private SectionRenderDispatcher.RenderSection current = null;
     //private HashSet<BlockPos>                 renderedPositions = new HashSet<>();
     //private long                              nextUpdate        = 0;
 
-    @Redirect(method = "renderChunkLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$RenderChunk;getCompiledChunk()Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;"))
-    public ChunkRenderDispatcher.CompiledChunk on(final ChunkRenderDispatcher.RenderChunk instance)
+    @Redirect(method = "renderSectionLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$RenderSection;getCompiled()Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$CompiledSection;"))
+    public SectionRenderDispatcher.CompiledSection on(final SectionRenderDispatcher.RenderSection instance)
     {
         current = instance;
-        return instance.getCompiledChunk();
+        return instance.getCompiled();
     }
 
-    @Redirect(method = "renderChunkLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/ChunkRenderDispatcher$CompiledChunk;isEmpty(Lnet/minecraft/client/renderer/RenderType;)Z"))
-    public boolean on(final ChunkRenderDispatcher.CompiledChunk instance, final RenderType type)
+    @Redirect(method = "renderSectionLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/chunk/SectionRenderDispatcher$CompiledSection;isEmpty(Lnet/minecraft/client/renderer/RenderType;)Z"))
+    public boolean on(final SectionRenderDispatcher.CompiledSection instance, final RenderType type)
     {
         boolean returnv =
           minecraft.cameraEntity != null && distSqr(minecraft.cameraEntity.position(), new Vec3(current.getOrigin().getX(), current.getOrigin().getY(), current.getOrigin().getZ()))

@@ -2,7 +2,7 @@ package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.event.ClientEventHandler;
 import net.minecraft.client.gui.components.OptionsList;
-import net.minecraft.client.gui.screens.VideoSettingsScreen;
+import net.minecraft.client.gui.screens.options.VideoSettingsScreen;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
