@@ -1,10 +1,13 @@
 package com.betterfpsdist.mixin;
 
-import net.minecraftforge.fml.loading.FMLLoader;
+import com.sun.management.HotSpotDiagnosticMXBean;
+import net.neoforged.fml.loading.FMLLoader;
+import net.neoforged.fml.loading.FMLPaths;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
 import org.spongepowered.asm.mixin.extensibility.IMixinInfo;
 
+import java.lang.management.ManagementFactory;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +16,19 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public void onLoad(final String mixinPackage)
     {
+        try
+        {
+            HotSpotDiagnosticMXBean bean = ManagementFactory.newPlatformMXBeanProxy(
+              ManagementFactory.getPlatformMBeanServer(),
+              "com.sun.management:type=HotSpotDiagnostic",
+              HotSpotDiagnosticMXBean.class);
 
+            bean.setVMOption("HeapDumpOnOutOfMemoryError", "true");
+            bean.setVMOption("HeapDumpPath", FMLPaths.GAMEDIR.get().toString());
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     @Override
