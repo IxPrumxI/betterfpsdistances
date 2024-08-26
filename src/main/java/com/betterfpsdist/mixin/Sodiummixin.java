@@ -1,9 +1,9 @@
 package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.BetterfpsdistMod;
-import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
-import me.jellysquid.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
-import me.jellysquid.mods.sodium.client.render.viewport.CameraTransform;
+import net.caffeinemc.mods.sodium.client.render.chunk.RenderSection;
+import net.caffeinemc.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
+import net.caffeinemc.mods.sodium.client.render.viewport.CameraTransform;
 import net.minecraft.client.Minecraft;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;

@@ -36,7 +36,7 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modCompileOnly("me.jellysquid.mods:sodium-fabric-0.5.9+mc1.21")
+    modCompileOnly("me.jellysquid.mods:sodium-fabric-0.6.0-beta.1+mc1.21")
     modImplementation("curse.maven:cupboard-326652:5477517")
 }
 

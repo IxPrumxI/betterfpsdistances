@@ -30,7 +30,7 @@
     "fabricloader": ">=0.11.3",
     "fabric": "*",
     "minecraft": "1.21.x",
-    "cupboard": ">=1.20.1-1.5",
+    "cupboard": ">=1.21-1.5",
     "java": ">=21"
   },
   "suggests": {
