@@ -8,6 +8,8 @@
   ],
   "client": [
     "LevelRendererMixin",
+    "SodiumGameOptionPagesMixin",
+    "Sodiummixin",
     "VideoSettingsScreenMixin"
   ],
   "injectors": {

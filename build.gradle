@@ -94,6 +94,8 @@ dependencies {
     implementation "net.neoforged:neoforge:${neo_version}"
     implementation "curse.maven:cupboard-326652:5477519"
     implementation "curse.maven:embeddium-908741:5496994"
+    compileOnly "me.jellysquid.mods:sodium-neoforge-0.6.0-beta.1+mc1.21"
+
 }
 
 tasks.withType(ProcessResources).configureEach {

@@ -1,17 +1,16 @@
 package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.BetterfpsdistMod;
+import net.caffeinemc.mods.sodium.client.render.chunk.RenderSection;
+import net.caffeinemc.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
+import net.caffeinemc.mods.sodium.client.render.viewport.CameraTransform;
 import net.minecraft.client.Minecraft;
-import org.embeddedt.embeddium.impl.render.chunk.RenderSection;
-import org.embeddedt.embeddium.impl.render.chunk.occlusion.OcclusionCuller;
-import org.embeddedt.embeddium.impl.render.viewport.CameraTransform;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-// Disabled, not needed for embeddium may be needed for sodium
 @Mixin(OcclusionCuller.class)
 public class Sodiummixin
 {

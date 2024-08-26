@@ -51,7 +51,6 @@ public class MixinConfig implements IMixinConfigPlugin
 
         return FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
                  FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
-                 FMLLoader.getLoadingModList().getModFileById("embeddium") != null ||
                  FMLLoader.getLoadingModList().getModFileById("sodium") != null;
     }
 
