@@ -27,7 +27,9 @@ public class MixinConfig implements IMixinConfigPlugin
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
         if (FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
-              FMLLoader.getLoadingModList().getModFileById("sodium") != null)
+              FMLLoader.getLoadingModList().getModFileById("sodium") != null ||
+              FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
+              FMLLoader.getLoadingModList().getModFileById("embeddium") != null)
         {
             if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
             {
