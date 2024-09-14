@@ -6,17 +6,38 @@ import com.google.gson.JsonObject;
 
 public class CommonConfiguration implements ICommonConfig
 {
-    public double stretch = 2.0;
+    public double verticalScaling   = 2.0;
+    public double horizontalScaling = 1.1;
+    public boolean debugMode         = false;
+    public boolean affectEntities = true;
 
     public JsonObject serialize()
     {
         final JsonObject root = new JsonObject();
 
         final JsonObject entry = new JsonObject();
-        entry.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched in Y direction."
+        entry.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched vertically."
                                      + " default:2.0, min 0.5, max 10");
-        entry.addProperty("stretch", stretch);
-        root.add("stretch", entry);
+        entry.addProperty("verticalScaling", verticalScaling);
+        root.add("verticalScaling", entry);
+
+
+        final JsonObject entry2 = new JsonObject();
+        entry2.addProperty("desc:", "The amount by which the chunk render distance sphere is stretched horizontally."
+                                      + " default:1.0, min 0.05, max 2");
+        entry2.addProperty("horizontalScaling", horizontalScaling);
+        root.add("horizontalScaling", entry2);
+
+        final JsonObject entry4 = new JsonObject();
+        entry4.addProperty("desc:", "Enables the distance stretch to also affect entity rendering, default = true");
+        entry4.addProperty("affectEntities", affectEntities);
+        root.add("affectEntities", entry4);
+
+        final JsonObject entry3 = new JsonObject();
+        entry3.addProperty("desc:", "Enables debug mode, which displays how many sections are being hidden(A section is an area of 16x16x16 blocks)"
+                                      + " default:false");
+        entry3.addProperty("debugMode", debugMode);
+        root.add("debugMode", entry3);
 
         return root;
     }
@@ -29,13 +50,9 @@ public class CommonConfiguration implements ICommonConfig
             return;
         }
 
-        try
-        {
-            stretch = data.get("stretch").getAsJsonObject().get("stretch").getAsDouble();
-        }
-        catch (Exception e)
-        {
-            BetterfpsdistMod.LOGGER.error("Could not parse config file", e);
-        }
+        verticalScaling = data.get("verticalScaling").getAsJsonObject().get("verticalScaling").getAsDouble();
+        horizontalScaling = data.get("horizontalScaling").getAsJsonObject().get("horizontalScaling").getAsDouble();
+        debugMode = data.get("debugMode").getAsJsonObject().get("debugMode").getAsBoolean();
+        affectEntities = data.get("affectEntities").getAsJsonObject().get("affectEntities").getAsBoolean();
     }
 }

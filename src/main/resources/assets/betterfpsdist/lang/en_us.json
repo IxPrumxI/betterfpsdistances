@@ -1,3 +1,4 @@
 {
-  "options.circularrenderdist": "Circular render distance stretch"
+  "options.verticalstretch": "Vertical render dist scale",
+  "options.horizontalstretch": "Horizontal render dist scale"
 }

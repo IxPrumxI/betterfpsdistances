@@ -1,5 +1,6 @@
 package com.betterfpsdist.mixin;
 
+import com.betterfpsdist.BetterfpsdistMod;
 import net.fabricmc.loader.api.FabricLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -25,14 +26,21 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
-        if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+        if (FabricLoader.getInstance().isModLoaded("magnesium") ||
+              FabricLoader.getInstance().isModLoaded("sodium"))
         {
-            return !FabricLoader.getInstance().isModLoaded("magnesium") &&
-                     !FabricLoader.getInstance().isModLoaded("sodium");
+            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+            {
+                return false;
+            }
         }
 
-        return FabricLoader.getInstance().isModLoaded("magnesium") ||
-                 FabricLoader.getInstance().isModLoaded("sodium");
+        if (mixinClassName.contains("EntityRenderDistMixin"))
+        {
+            return BetterfpsdistMod.config.getCommonConfig().affectEntities;
+        }
+
+        return true;
     }
 
     @Override
