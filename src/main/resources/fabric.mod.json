@@ -9,8 +9,8 @@
     "Someaddons"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/better-fps-render-distance-fabric",
+    "sources": "https://github.com/someaddons/betterfpsdistances"
   },
 
   "license": "ARR",
