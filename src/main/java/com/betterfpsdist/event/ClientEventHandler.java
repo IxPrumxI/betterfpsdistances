@@ -46,6 +46,9 @@ public class ClientEventHandler
         chunkrenderdist.set(BetterfpsdistMod.config.getCommonConfig().verticalScaling);
         chunkrenderdistxz.set(BetterfpsdistMod.config.getCommonConfig().horizontalScaling - 1.0);
     }
+
+    private static int hiddenCount = 0;
+
     private static void onClientTick(final TickEvent.ClientTickEvent event)
     {
         if (event.phase == TickEvent.Phase.START)
@@ -74,11 +77,15 @@ public class ClientEventHandler
         if (BetterfpsdistMod.config.getCommonConfig().debugMode && Minecraft.getInstance().player.level().getGameTime() > nextUpdate)
         {
             nextUpdate = Minecraft.getInstance().player.level().getGameTime() + 20 * 2;
-            BetterfpsdistMod.LOGGER.warn("Hidden Sections:" + hiddenSections.size());
-            Minecraft.getInstance().player.displayClientMessage(Component.literal("Hidden chunk sections:" + hiddenSections.size()), true);
-        }
 
-        hiddenSections.clear();
+            if (!hiddenSections.isEmpty())
+            {
+                hiddenCount = hiddenSections.size();
+            }
+
+            Minecraft.getInstance().player.displayClientMessage(Component.literal("Hidden chunk sections:" + hiddenCount), true);
+            hiddenSections.clear();
+        }
     }
 
     public static float xStretch  = 1;
