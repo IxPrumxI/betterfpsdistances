@@ -28,7 +28,9 @@ public class SodiumGameOptionPagesMixin
         instance.add(OptionImpl.createBuilder(Integer.TYPE, vanillaOpts)
           .setName(Component.translatable("options.verticalstretch"))
           .setTooltip(Component.literal("Reduces the distance at which chunks beneath/above are shown"))
-          .setControl(option -> new SliderControl(option, 50, 1000, 25, ControlValueFormatter.percentage()))
+          .setControl(option -> {
+              option.setValue((int) (BetterfpsdistMod.config.getCommonConfig().verticalScaling * 100));
+              return new SliderControl(option, 50, 1000, 25, ControlValueFormatter.percentage());})
           .setBinding(
             (options, value) -> {
                 BetterfpsdistMod.config.getCommonConfig().verticalScaling = value / 100d;
@@ -43,7 +45,9 @@ public class SodiumGameOptionPagesMixin
         instance.add(OptionImpl.createBuilder(Integer.TYPE, vanillaOpts)
           .setName(Component.translatable("options.horizontalstretch"))
           .setTooltip(Component.literal("Reduces the distance at which chunks left/right are shown"))
-          .setControl(option -> new SliderControl(option, 0, 100, 1, ControlValueFormatter.percentage()))
+          .setControl(option -> {
+              option.setValue((int) ((BetterfpsdistMod.config.getCommonConfig().horizontalScaling - 1) * 100));
+              return new SliderControl(option, 0, 100, 1, ControlValueFormatter.percentage());})
           .setBinding(
             (options, value) -> {
                 BetterfpsdistMod.config.getCommonConfig().horizontalScaling = 1 + value / 100d;
