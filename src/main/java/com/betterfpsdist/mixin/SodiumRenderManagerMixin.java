@@ -36,7 +36,7 @@ public class SodiumRenderManagerMixin
         int xDiff = x- (pos.getX() >> 4);
         int yDiff = y - (pos.getY() >> 4);
         int zDiff = z - (pos.getZ() >> 4);
-        cir.setReturnValue(xDiff * xDiff + BetterfpsdistMod.config.getCommonConfig().stretch * (yDiff * yDiff) + zDiff * zDiff
+        cir.setReturnValue(xDiff * xDiff + BetterfpsdistMod.config.getCommonConfig().verticalScaling * (yDiff * yDiff) + zDiff * zDiff
                              > renderDistance * renderDistance);
     }
 }

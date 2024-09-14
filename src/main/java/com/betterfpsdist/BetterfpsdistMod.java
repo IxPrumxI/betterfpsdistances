@@ -3,6 +3,7 @@ package com.betterfpsdist;
 import com.betterfpsdist.config.CommonConfiguration;
 import com.cupboard.config.CupboardConfig;
 import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

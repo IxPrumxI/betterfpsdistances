@@ -18,6 +18,6 @@ public class VideoSettingsScreenMixin
     @Inject(method = "init", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/components/OptionsList;addSmall([Lnet/minecraft/client/OptionInstance;)V"))
     public void on(final CallbackInfo ci)
     {
-        list.addBig(ClientEventHandler.chunkrenderdist);
+        list.addSmall(ClientEventHandler.chunkrenderdist, ClientEventHandler.chunkrenderdistxz);
     }
 }
