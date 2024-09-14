@@ -1,5 +1,6 @@
 package com.betterfpsdist.mixin;
 
+import com.betterfpsdist.BetterfpsdistMod;
 import net.minecraftforge.fml.loading.FMLLoader;
 import org.objectweb.asm.tree.ClassNode;
 import org.spongepowered.asm.mixin.extensibility.IMixinConfigPlugin;
@@ -25,19 +26,21 @@ public class MixinConfig implements IMixinConfigPlugin
     @Override
     public boolean shouldApplyMixin(final String targetClassName, final String mixinClassName)
     {
-        if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin")
-        || mixinClassName.contains("VideoSettingsScreenMixin"))
+        if (FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
+              FMLLoader.getLoadingModList().getModFileById("sodium") != null)
         {
-            return FMLLoader.getLoadingModList().getModFileById("magnesium") == null &&
-                     FMLLoader.getLoadingModList().getModFileById("rubidium") == null &&
-                     FMLLoader.getLoadingModList().getModFileById("embeddium") == null &&
-                     FMLLoader.getLoadingModList().getModFileById("sodium") == null;
+            if (mixinClassName.equals("com.betterfpsdist.mixin.LevelRendererMixin") || mixinClassName.contains("VideoSettingsScreen"))
+            {
+                return false;
+            }
         }
 
-        return FMLLoader.getLoadingModList().getModFileById("magnesium") != null ||
-                 FMLLoader.getLoadingModList().getModFileById("rubidium") != null ||
-                 FMLLoader.getLoadingModList().getModFileById("embeddium") != null ||
-                 FMLLoader.getLoadingModList().getModFileById("sodium") != null;
+        if (mixinClassName.contains("EntityRenderDistMixin"))
+        {
+            return BetterfpsdistMod.config.getCommonConfig().affectEntities;
+        }
+
+        return true;
     }
 
     @Override

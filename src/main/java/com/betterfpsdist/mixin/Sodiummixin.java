@@ -1,12 +1,13 @@
 package com.betterfpsdist.mixin;
 
 import com.betterfpsdist.BetterfpsdistMod;
+import com.betterfpsdist.event.ClientEventHandler;
 import me.jellysquid.mods.sodium.client.render.chunk.RenderSection;
 import me.jellysquid.mods.sodium.client.render.chunk.occlusion.OcclusionCuller;
 import me.jellysquid.mods.sodium.client.render.viewport.CameraTransform;
 import net.minecraft.client.Minecraft;
+import net.minecraft.core.BlockPos;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -22,26 +23,20 @@ public class Sodiummixin
     {
         if (Minecraft.getInstance().player != null)
         {
-            if (distSqr(section.getOriginX(),
+            if (ClientEventHandler.adjustedDistance(section.getOriginX(),
               section.getOriginY(),
               section.getOriginZ(),
               Minecraft.getInstance().player.getX(),
               Minecraft.getInstance().player.getY(),
               Minecraft.getInstance().player.getZ())
-                  > (Minecraft.getInstance().options.renderDistance().get() * 16) * (
-              Minecraft.getInstance().options.renderDistance().get() * 16))
+                  > ClientEventHandler.maxSqDist)
             {
+                if (BetterfpsdistMod.config.getCommonConfig().debugMode)
+                {
+                    ClientEventHandler.hiddenSections.add(new BlockPos(section.getOriginX(), section.getOriginY(), section.getOriginZ()));
+                }
                 cir.setReturnValue(false);
             }
         }
-    }
-
-    @Unique
-    private static double distSqr(float fromX, float fromY, float fromZ, double toX, double toY, double toZ)
-    {
-        double d0 = fromX - toX;
-        double d1 = fromY - toY;
-        double d2 = fromZ - toZ;
-        return d0 * d0 + BetterfpsdistMod.config.getCommonConfig().stretch * (d1 * d1) + d2 * d2;
     }
 }
