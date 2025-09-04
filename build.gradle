@@ -2,6 +2,7 @@ plugins {
     id 'fabric-loom' version "${loom_version}"
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '7.1.2' apply false
+    id 'idea'
 }
 
 var ENV = System.getenv()
@@ -36,8 +37,8 @@ dependencies {
     mappings loom.officialMojangMappings()
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-    modCompileOnly("me.jellysquid.mods:sodium-fabric-0.6.0-beta.1+mc1.21")
-    modImplementation("curse.maven:cupboard-326652:5477517")
+    modCompileOnly("curse.maven:sodium-394468:6661395")
+    modImplementation("curse.maven:cupboard-326652:6836467")
 }
 
 loom {
