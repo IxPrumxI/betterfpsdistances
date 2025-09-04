@@ -18,9 +18,6 @@ import org.spongepowered.asm.mixin.injection.*;
 @Mixin(LevelRenderer.class)
 public class LevelRendererMixin
 {
-    @Shadow
-    @Final
-    private Minecraft minecraft;
 
     @ModifyVariable(
             method = "compileSections",
@@ -31,10 +28,8 @@ public class LevelRendererMixin
             ordinal = 0,
             index = 8
     )
-    private boolean modifyShouldCompileSection(boolean original, @Local SectionRenderDispatcher.RenderSection renderSection) {
-        if (minecraft.cameraEntity == null) return false;
-
-        BlockPos cameraPos = minecraft.cameraEntity.blockPosition();
+    private boolean modifyShouldCompileSection(boolean original, Camera camera, @Local SectionRenderDispatcher.RenderSection renderSection) {
+        BlockPos cameraPos = camera.getEntity().blockPosition();
         BlockPos sectionCenter = SectionPos.of(renderSection.getSectionNode()).center();
 
         double distanceSq = sectionCenter.distSqr(cameraPos);
@@ -47,5 +42,4 @@ public class LevelRendererMixin
 
         return original;
     }
-
 }
